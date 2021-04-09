@@ -20,6 +20,7 @@
         "lamoda/lamoda-b2b-platform.dto": "~1.0",
         "doctrine/orm": "~2.2,>=2.2.3"
     },
+    "minimum-stability": "dev",
     "suggest": {
         "cetera-labs/lamoda-b2b-platform.php-sdk-bundle": ""
     },
