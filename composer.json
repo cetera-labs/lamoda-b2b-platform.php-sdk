@@ -1,5 +1,5 @@
 {
-    "name": "lamoda/lamoda-b2b-platform.php-sdk",
+    "name": "cetera-labs/lamoda-b2b-platform.php-sdk",
     "type": "library",
     "description": "SDK for interacting with Lamoda B2B Platform",
     "license": "Apache-2.0",
@@ -21,7 +21,7 @@
         "doctrine/orm": "~2.2,>=2.2.3"
     },
     "suggest": {
-        "lamoda/lamoda-b2b-platform.php-sdk-bundle": ""
+        "cetera-labs/lamoda-b2b-platform.php-sdk-bundle": ""
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1"
