@@ -19,6 +19,8 @@ class LamodaB2BClient
 {
     const URI_API_V1_PACKS_TRACKING       = '/api/v1/packsTracking/%s';
     const URI_API_V1_ORDERS_TRACKING      = '/api/v1/ordersTracking/%s';
+    const URI_API_V1_DELIVERY_CITY        = '/api/v1/addresses/city';
+    const URI_API_V1_PICKUP_POINTS        = '/api/v1/pickup_points';
     const URI_API_V1_SHIPMENTS_OUT        = '/api/v1/shipments/out';
     const URI_API_V1_ORDERS               = '/api/v1/orders';
     const URI_API_V1_ORDER                = '/api/v1/orders/%s';
@@ -259,6 +261,94 @@ class LamodaB2BClient
         return $packTrackingResponse->getBody();
     }
 
+
+ /**
+     * @param $partnerCode
+     * @param $params
+     *
+     * @return string
+     * @throws HttpRequestException
+     */
+    public function getCity($partnerCode,$params)
+     { 
+
+        $accessToken = $this->getAccessToken($partnerCode);
+
+        $uri = self::URI_API_V1_DELIVERY_CITY;
+
+    
+        $response = $this->sender->sendRequest(
+            $uri,
+            Sender::METHOD_GET,
+            $this->getHeaders([
+                'Authorization' => $this->getAuthString($accessToken),
+            ]),
+            null,
+            $params
+
+        );
+
+
+        $this->parseResponse($response);
+
+        return  $response->getBody();
+
+    }
+
+
+    public function getPickupPoints($partnerCode,$params)
+    { 
+
+       $accessToken = $this->getAccessToken($partnerCode);
+
+       $uri = self::URI_API_V1_PICKUP_POINTS;
+
+   
+       $response = $this->sender->sendRequest(
+           $uri,
+           Sender::METHOD_GET,
+           $this->getHeaders([
+               'Authorization' => $this->getAuthString($accessToken),
+           ]),
+           null,
+           $params
+       );
+
+
+       $this->parseResponse($response);
+
+       return  $response->getBody();
+
+   }
+
+
+    public function getDeliveryInfo($partnerCode,$params) {
+
+        $accessToken = $this->getAccessToken($partnerCode);
+
+        $uri = "/api/v1/delivery_info";
+
+    
+        $response = $this->sender->sendRequest(
+            $uri,
+            Sender::METHOD_GET,
+            $this->getHeaders([
+                'Authorization' => $this->getAuthString($accessToken),
+            ]),
+            null,
+            $params
+
+        );
+
+
+        $this->parseResponse($response);
+
+        return  $response->getBody();
+    }
+
+
+    
+
     /**
      * @param string $partnerCode
      * @param array $params
@@ -286,6 +376,8 @@ class LamodaB2BClient
 
         return $response->getBody();
     }
+
+
 
     /**
      * @param string $partnerCode
