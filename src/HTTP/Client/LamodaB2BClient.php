@@ -21,6 +21,7 @@ class LamodaB2BClient
     const URI_API_V1_ORDERS_TRACKING      = '/api/v1/ordersTracking/%s';
     const URI_API_V1_DELIVERY_CITY        = '/api/v1/addresses/city';
     const URI_API_V1_PICKUP_POINTS        = '/api/v1/pickup_points';
+    const URI_API_V1_PICKUP_INFO          = '/api/v1/pickup_points/%s';
     const URI_API_V1_SHIPMENTS_OUT        = '/api/v1/shipments/out';
     const URI_API_V1_ORDERS               = '/api/v1/orders';
     const URI_API_V1_ORDER                = '/api/v1/orders/%s';
@@ -320,6 +321,35 @@ class LamodaB2BClient
        return  $response->getBody();
 
    }
+
+   public function getPickupInfo($partnerCode,$params, $pickupId)
+   { 
+
+    $accessToken = $this->getAccessToken($partnerCode);
+
+    $uri =    sprintf(self::URI_API_V1_PICKUP_INFO, $pickupId);
+
+    
+      
+
+
+       $response = $this->sender->sendRequest(
+            $uri,
+            Sender::METHOD_GET,
+            $this->getHeaders([
+                'Authorization' => $this->getAuthString($accessToken),
+            ]),
+            null,
+            $params
+    );
+
+
+    $this->parseResponse($response);
+
+    return  $response->getBody();
+    
+    
+    }
 
 
     public function getDeliveryInfo($partnerCode,$params) {
