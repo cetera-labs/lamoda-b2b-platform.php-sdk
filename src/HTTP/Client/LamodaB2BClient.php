@@ -20,6 +20,7 @@ class LamodaB2BClient
     const URI_API_V1_PACKS_TRACKING       = '/api/v1/packsTracking/%s';
     const URI_API_V1_ORDERS_TRACKING      = '/api/v1/ordersTracking/%s';
     const URI_API_V1_DELIVERY_CITY        = '/api/v1/addresses/city';
+    const URI_API_V1_DELIVERY_METHODS     = '/api/v1/delivery_methods';
     const URI_API_V1_PICKUP_POINTS        = '/api/v1/pickup_points';
     const URI_API_V1_PICKUP_INFO          = '/api/v1/pickup_points/%s';
     const URI_API_V1_STREETS              = '/api/v1/addresses/street';
@@ -285,6 +286,31 @@ class LamodaB2BClient
         return  $response->getBody();
 
     }
+
+    public function getDeliveryMethods($partnerCode,$params) { 
+        $accessToken = $this->getAccessToken($partnerCode);
+        $uri = self::URI_API_V1_DELIVERY_METHODS;
+               
+        $response = $this->sender->sendRequest(
+            $uri,
+            Sender::METHOD_GET,
+            $this->getHeaders([
+                'Authorization' => $this->getAuthString($accessToken),
+            ]),
+            null,
+            $params
+
+        );
+
+        $this->parseResponse($response);
+
+        return  $response->getBody();
+
+
+
+    }
+
+
 
     public function getStreet($partnerCode,$params) {
         $accessToken = $this->getAccessToken($partnerCode);
