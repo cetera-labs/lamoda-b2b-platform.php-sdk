@@ -48,7 +48,7 @@ class Sender
      *
      * @throws HttpRequestException
      */
-    public function sendRequest($uri, $method, $headers, $data = null, $query = [])
+    public function sendRequest($uri, $method, $headers, $data = null, $query = [], $timeout = null)
     {
         $fullUrl = $this->baseUrl . $uri;
 
@@ -57,7 +57,7 @@ class Sender
 
         try {
             /** @var ResponseInterface $result */
-            $result   = $client->request($method, $fullUrl, ["timeout" => "3.14", 'headers' => $headers, 'body' => $data, 'query' => $query]);
+            $result   = $client->request($method, $fullUrl, ["timeout" => $timeout, 'headers' => $headers, 'body' => $data, 'query' => $query]);
 
             $response = $this->createResponse($result->getStatusCode(), $result->getBody(), $result->getHeaders());
 
