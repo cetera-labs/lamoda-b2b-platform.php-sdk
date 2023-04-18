@@ -57,7 +57,7 @@ class Sender
 
         try {
             /** @var ResponseInterface $result */
-            $result   = $client->request($method, $fullUrl, ['headers' => $headers, 'body' => $data, 'query' => $query]);
+            $result   = $client->request($method, $fullUrl, ["timeout" => "3.14", 'headers' => $headers, 'body' => $data, 'query' => $query]);
 
             $response = $this->createResponse($result->getStatusCode(), $result->getBody(), $result->getHeaders());
 
