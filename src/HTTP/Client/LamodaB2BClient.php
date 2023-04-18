@@ -287,7 +287,7 @@ class LamodaB2BClient
 
     }
 
-    public function getDeliveryMethods($partnerCode,$params) { 
+    public function getDeliveryMethods($partnerCode,$params, $timeout = null) { 
         $accessToken = $this->getAccessToken($partnerCode);
         $uri = self::URI_API_V1_DELIVERY_METHODS;
                
@@ -298,7 +298,8 @@ class LamodaB2BClient
                 'Authorization' => $this->getAuthString($accessToken),
             ]),
             null,
-            $params
+            $params,
+            $timeout
 
         );
 
@@ -312,7 +313,7 @@ class LamodaB2BClient
 
 
 
-    public function getStreet($partnerCode,$params) {
+    public function getStreet($partnerCode,$params, $timeout = null) {
         $accessToken = $this->getAccessToken($partnerCode);
 
         $uri = self::URI_API_V1_STREETS;
@@ -325,6 +326,7 @@ class LamodaB2BClient
             ]),
             null,
             $params
+            $timeout
 
         );
 
@@ -368,7 +370,7 @@ class LamodaB2BClient
     }
 
 
-    public function getPickupPoints($partnerCode,$params)
+    public function getPickupPoints($partnerCode,$params, $timeout = null)
     { 
 
        $accessToken = $this->getAccessToken($partnerCode);
@@ -383,7 +385,8 @@ class LamodaB2BClient
                'Authorization' => $this->getAuthString($accessToken),
            ]),
            null,
-           $params
+           $params,
+           $timeout
        );
 
 
@@ -393,25 +396,22 @@ class LamodaB2BClient
 
    }
 
-   public function getPickupInfo($partnerCode,$params, $pickupId)
+   public function getPickupInfo($partnerCode,$params, $pickupId, $timeout = null)
    { 
 
     $accessToken = $this->getAccessToken($partnerCode);
 
     $uri =    sprintf(self::URI_API_V1_PICKUP_INFO, $pickupId);
 
-    
-      
-
-
-       $response = $this->sender->sendRequest(
-            $uri,
-            Sender::METHOD_GET,
-            $this->getHeaders([
-                'Authorization' => $this->getAuthString($accessToken),
-            ]),
-            null,
-            $params
+    $response = $this->sender->sendRequest(
+        $uri,
+        Sender::METHOD_GET,
+        $this->getHeaders([
+            'Authorization' => $this->getAuthString($accessToken),
+        ]),
+        null,
+        $params,
+        $timeout
     );
 
 
