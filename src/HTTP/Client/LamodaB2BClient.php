@@ -325,7 +325,7 @@ class LamodaB2BClient
                 'Authorization' => $this->getAuthString($accessToken),
             ]),
             null,
-            $params
+            $params,
             $timeout
 
         );
